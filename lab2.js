@@ -20,7 +20,6 @@
 //   return count;
 // }
 
-// // Интерполяционный поиск
 // function interpolationSearch(arr, x) {
 //   let count = 0;
 //   let low = 0;
@@ -44,7 +43,6 @@
 //   return count;
 // }
 
-// // Генерация массива случайных чисел
 // function generateRandomArray(length, range) {
 //   let arr = [];
 //   for (let i = 0; i < length; i++) {
@@ -53,7 +51,6 @@
 //   return arr.sort((a, b) => a - b);
 // }
 
-// // Тестирование алгоритмов
 // let arr = generateRandomArray(100, 50);
 // let x = Math.floor(Math.random() * 51); // Случайное число от 0 до 50
 // console.log('Массив:', arr);
@@ -164,7 +161,6 @@ console.log('');
 //   }
 // }
 
-// // Example usage
 // const bst = new BinarySearchTree();
 // const sequence = [20, 10, 30, 5, 15, 25, 35];
 // sequence.forEach((value) => bst.insert(value));
@@ -199,8 +195,7 @@ class HashTable {
   }
 
   doubleHash(key, i) {
-    // Двойное хэширование
-    const R = 13; // Вторая хэш-функция (можно подобрать)
+    const R = 13;
     const hash1 = this.hash(key);
     const hash2 = R - (key % R);
     return (hash1 + i * hash2) % this.size;
@@ -209,12 +204,9 @@ class HashTable {
   insert(key, value) {
     const hashValue = this.hash(key);
 
-    // Проверяем наличие коллизий и разрешаем их
     if (!this.table[hashValue]) {
-      // Пустая ячейка, просто вставляем значение
       this.table[hashValue] = [{ key, value }];
     } else {
-      // Коллизия, разрешаем с помощью цепочек переполнения
       let i = 1;
       while (this.table[this.linearProbe(hashValue, i)]) {
         i++;
@@ -226,16 +218,13 @@ class HashTable {
   search(key) {
     const hashValue = this.hash(key);
 
-    // Проверяем наличие коллизий и ищем значение
     if (this.table[hashValue]) {
-      // Поиск в основной ячейке
       for (let i = 0; i < this.table[hashValue].length; i++) {
         if (this.table[hashValue][i].key === key) {
           return this.table[hashValue][i].value;
         }
       }
 
-      // Поиск в ячейках с цепочками переполнения
       let i = 1;
       while (this.table[this.linearProbe(hashValue, i)]) {
         for (
@@ -255,18 +244,15 @@ class HashTable {
   }
 }
 
-// Пример использования
 
 const hashTable = new HashTable(10);
 
-// Вставка значений
 hashTable.insert(1, 'Значение 1');
 hashTable.insert(11, 'Значение 11');
 hashTable.insert(21, 'Значение 21');
 hashTable.insert(2, 'Значение 2');
 hashTable.insert(1, 'Значение 1');
 
-// Поиск значений
 console.log(hashTable.search(1));
 console.log(hashTable.search(11));
 console.log(hashTable.search(21));
